@@ -27,8 +27,9 @@ class WatchlistSerializer(serializers.ModelSerializer):
         else:
             return value
         
-class StreamPlatFormSerializer(serializers.ModelSerializer):
+class StreamPlatFormSerializer(serializers.HyperlinkedModelSerializer):
     Watchlist = WatchlistSerializer(many=True, read_only=True)
+ 
     class Meta:
         model = StreamPlatform
         fields = '__all__'
