@@ -1,18 +1,32 @@
-from django.shortcuts import render
-from django.http import JsonResponse   
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics, mixins
 from rest_framework.views import APIView
-from watchlist_app.models import Watchlist, StreamPlatform
-from watchlist_app.api.serializers import WatchlistSerializer, StreamPlatFormSerializer
+from watchlist_app.models import Watchlist, StreamPlatform, Review
+from watchlist_app.api.serializers import WatchlistSerializer, StreamPlatFormSerializer, ReviewSerializer
+
+
+class ReviewlistView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+class ReviewDetailView(mixins.RetrieveModelMixin, generics.GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
 class StreamPlatformView(APIView):
 
     def get(self, request):
         StreamPlatforms = StreamPlatform.objects.all()
         serializer = StreamPlatFormSerializer(StreamPlatforms, many = True, context={'request': request})
-        lookup_field = 'slug'
         return Response(serializer.data)
     
     def post(self, request):
@@ -52,6 +66,7 @@ class WatchListView(APIView):
 
     def get(self, request):
         movies = Watchlist.objects.all()
+        breakpoint()
         serializer = WatchlistSerializer(movies, many=True)
         return Response(serializer.data)
     
