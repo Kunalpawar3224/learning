@@ -13,4 +13,6 @@ for i in range(1, n):
         if array[j] > array[i]:
             array[j], array[i] = array[i], array[j]
 
+        print(array)
+
 print(array)
