@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 
-class AdminOrReadOnly(permissions.IsAdminUser):
+class IsAdminOrReadOnly(permissions.IsAdminUser):
     def has_permission(self, request, view):
         '''
         Check if the user is an admin or the request method is GET.
@@ -18,7 +18,7 @@ class AdminOrReadOnly(permissions.IsAdminUser):
             return bool(request.user and request.user.is_staff)
  
 
-class ReviewUserorReadOnly(permissions.BasePermission):
+class IsReviewUserorReadOnly(permissions.BasePermission):
     ''''
     If the user is a review owner then only he has all he permissions otherwise
     other user can have only get permissions
