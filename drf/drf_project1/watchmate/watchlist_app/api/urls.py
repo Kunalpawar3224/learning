@@ -9,7 +9,7 @@ router.register('platform', StreamPlatformView, basename='streamplatform')
 
 urlpatterns = [
     path('list/', WatchListView.as_view(), name='movie_list'),
-    path('<int:pk>', WatchListDetailsView.as_view(), name= 'movie_details'),
+    path('<int:pk>/', WatchListDetailsView.as_view(), name= 'movie_details'),
 
     path('', include(router.urls)),
     # path('platform-list/', StreamPlatformView.as_view(), name='streamPlatform_list'),
