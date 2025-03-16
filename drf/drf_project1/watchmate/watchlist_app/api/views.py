@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics, viewsets, mixins
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, ScopedRateThrottle
 
 from watchlist_app.api.permissions import IsAdminOrReadOnly, IsReviewUserorReadOnly
 from watchlist_app.models import Watchlist, StreamPlatform, Review
@@ -52,7 +52,8 @@ class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsReviewUserorReadOnly]
-    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    throttle_classes = [UserRateThrottle, AnonRateThrottle, ScopedRateThrottle]
+    throttle_scope = 'review-detail'
 
 class StreamPlatformView(viewsets.ModelViewSet):
     permission_classes = [IsAdminOrReadOnly]

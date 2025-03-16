@@ -20,7 +20,7 @@ class IsAdminOrReadOnly(permissions.IsAdminUser):
 
 class IsReviewUserorReadOnly(permissions.BasePermission):
     ''''
-    If the user is a review owner then only he has all he permissions otherwise
+    If the user is a review owner then only he has all the permissions otherwise
     other user can have only get permissions
     '''
 

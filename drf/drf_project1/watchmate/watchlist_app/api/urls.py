@@ -3,7 +3,8 @@ from rest_framework.routers import DefaultRouter
 from watchlist_app.api.views import (WatchListView, WatchListDetailsView,
                                     StreamPlatformView, ReviewlistView,
                                     ReviewDetailView, ReviewCreateView)
-
+# router is used when you are working with viewsets in Django REST framework, and it helps generate the URL 
+# patterns for API endpoints automatically.
 router = DefaultRouter()
 router.register('platform', StreamPlatformView, basename='streamplatform')
 
