@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import ValidationError
+from rest_framework import filters
 from rest_framework.response import Response
 from rest_framework import status, generics, viewsets, mixins
 from rest_framework.views import APIView
@@ -116,7 +117,16 @@ class StreamPlatformDetailView(APIView):
         platform_detail = StreamPlatform.objects.get(pk=pk)
         platform_detail.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
+
+# For Test purpose only
+class WatchList(generics.ListAPIView):
+    queryset = Watchlist.objects.all()
+    serializer_class = WatchlistSerializer
+    # filter_backends = [filters.SearchFilter]
+    # filterset_fields = ['=title', '=platform__name']
+
+    filter_backends = [filters.OrderingFilter]
+    filterset_fields = ['avg_rating']
 class WatchListView(APIView):
     permission_classes = [IsAdminOrReadOnly]
 
