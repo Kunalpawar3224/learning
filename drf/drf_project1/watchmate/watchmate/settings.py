@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'watchlist_app',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -144,5 +145,6 @@ REST_FRAMEWORK = {
         'user': '10/day',
         'revie-create': '3/day',
         'review-list': '10/day',
+        'review-detail': '2/day',
     }
 }
