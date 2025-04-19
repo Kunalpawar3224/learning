@@ -10,22 +10,16 @@ class Solution:
             # print(w)
             if a[w] == "I":
                 g = I + g
-                # print(w)
-                print("abc")
-                # print(w == n)
-                if not w == n-1:
-                    if a[w+1] == "V" or "X":
-                        g = g - I
             if a[w] == "V":
                 if a[w-1] == "I":
-                    g = V-I + g
+                    g = V-I-1 + g
                     print("g6 = ", g)
                 else:
                     g = V + g
                     print("g5 = ", g)
             if a[w] == "X":
                 if a[w-1] == "I":
-                    g = X-I + g
+                    g = X-I-1 + g
                 elif a[w+1] == "C" or "L":
                     None
                 else:
@@ -61,5 +55,5 @@ class Solution:
 
 
 sol = Solution()
-sol.romanToInt("III")
+sol.romanToInt("MCMXCIV")
 
