@@ -3,24 +3,20 @@ class Solution:
         I, V, X, L, C, D, M = 1, 5, 10, 50, 100, 500, 1000
 
         a = list(s)
-        # print("a = ", a)
         g = 0
         n = len(a)
         for w in range(0, n):
-            # print(w)
             if a[w] == "I":
                 g = I + g
             if a[w] == "V":
                 if a[w-1] == "I":
                     g = V-I-1 + g
-                    print("g6 = ", g)
                 else:
                     g = V + g
-                    print("g5 = ", g)
             if a[w] == "X":
                 if a[w-1] == "I":
                     g = X-I-1 + g
-                elif a[w+1] == "C" or "L":
+                elif a[w+1] == "C" or a[w+1] == "L":
                     None
                 else:
                     g = X+ g
@@ -30,14 +26,18 @@ class Solution:
                 else:
                     g = L + g
             if a[w] == "C":
+                print("a")
                 if a[w-1] == "X":
+                    print("b")
                     g = C-X + g
-                    print("g4 = ", g)
-                elif a[w+1] == "M" or "D":
+                elif a[w+1] == "M" or a[w+1] == "D":
+                    print(a[w+1] == "M" or "D")
+                    print("c")
                     None
                 else:
+                    print("d")
                     g = C + g
-                    print("g3 = ", g)
+                    print(g)
             if a[w] == "D":
                 if a[w-1] == "C":
                     g = D-C + g
@@ -46,14 +46,11 @@ class Solution:
             if a[w] == "M":
                 if a[w-1] == "C":
                     g = M-C + g
-                    print("g2 = ", g)
                 else:
                     g = M + g
-                print("g1 = ", g)
-        print(type(I))
         print(g)
-
+        return g
 
 sol = Solution()
-sol.romanToInt("MCMXCIV")
+sol.romanToInt("DCXXI")
 
