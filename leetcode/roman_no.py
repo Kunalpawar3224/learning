@@ -1,56 +1,18 @@
 class Solution:
     def romanToInt(self, s: str) -> int:
-        I, V, X, L, C, D, M = 1, 5, 10, 50, 100, 500, 1000
+        roman = {
+            "I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000 
+        }
+        res = 0
 
-        a = list(s)
-        g = 0
-        n = len(a)
-        for w in range(0, n):
-            if a[w] == "I":
-                g = I + g
-            if a[w] == "V":
-                if a[w-1] == "I":
-                    g = V-I-1 + g
-                else:
-                    g = V + g
-            if a[w] == "X":
-                if a[w-1] == "I":
-                    g = X-I-1 + g
-                elif a[w+1] == "C" or a[w+1] == "L":
-                    None
-                else:
-                    g = X+ g
-            if a[w] == "L":
-                if a[w-1] == "X":
-                    g = L-X + g
-                else:
-                    g = L + g
-            if a[w] == "C":
-                print("a")
-                if a[w-1] == "X":
-                    print("b")
-                    g = C-X + g
-                elif a[w+1] == "M" or a[w+1] == "D":
-                    print(a[w+1] == "M" or "D")
-                    print("c")
-                    None
-                else:
-                    print("d")
-                    g = C + g
-                    print(g)
-            if a[w] == "D":
-                if a[w-1] == "C":
-                    g = D-C + g
-                else:
-                    g = D + g
-            if a[w] == "M":
-                if a[w-1] == "C":
-                    g = M-C + g
-                else:
-                    g = M + g
-        print(g)
-        return g
-
+        for i in range(len(s)):
+            # i+1 < len(s): This checks that we are not at the last character (to avoid an "index out of range" error when checking s[i+1]).
+            # roman[s[i]] < roman[s[i+1]]: This checks if the current numeral is smaller than the next numeral.
+            if i+1 < len(s) and roman[s[i]] < roman[s[i+1]]:
+                res -= roman[s[i]]             # subtract the value of the current numeral from the result.
+            else:
+                res += roman[s[i]]
+        return res
 sol = Solution()
-sol.romanToInt("DCXXI")
+sol.romanToInt("MCMXCIV")
 
