@@ -1,5 +1,5 @@
 from groq import Groq
-# api_key = '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'
+
 
 
 def chatbot(message):
